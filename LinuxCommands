@@ -1,4 +1,187 @@
 
-
+#
+# THIS STUFF IS JUST PERSONEL, NOBODY ELSE NEEDS IT !
+#
 # Linux Commands
 #
+
+https://www.linuxquestions.org/questions/linux-software-2/how-can-i-determine-what-github-repo-identifier-i-need-in-order-to-check-out-my-specific-ubuntu-linux-kernel-version-4175626376/
+When you clone the master of that repository, issue a...
+$ git branch -a
+...to list all branches on that git. You either will, or will not find one named 4.13.0-37-generic, or similar.
+
+LINUX COMMAND REFERENCE
+
+# Install java plugin on Chrome browser
+$ sudo mkdir -p /opt/google/chrome/plugins
+
+---------------------------------------------------
+# locate command is nice !
+$ locate java
+---------------------------------------------------
+# Create Icons to launch apps in Linux
+$ sudo apt-get install --no-install-recommends gnome-panel
+# After installing gnome-panel, use following command to create a launcher.
+$ gnome-desktop-item-edit --create-new ~/Desktop
+---------------------------------------------------
+#Ident Desktop and Session type on Ubuntu Linux
+$ printf 'Desktop: %s\nSession: %s\n' "$XDG_CURRENT_DESKTOP" "$GDMSESSION"
+----------------------------------------------------
+# DNS server stuff
+$ nmcli device show <interfacename> | grep IP4.DNS
+
+----------------------------------------------------
+	 	 	
+/etc/modules
+
+#----cut here----
+# Chip drivers
+coretemp
+#----cut here----
+
+----------------------------------------------------
+Here's an advanced find command you can run to find files over 10 MB (no variables in this one, just copy and paste):
+find / -mount -noleaf -type f -size +10000k -print0 | xargs -0 ls -lhSr | awk '{printf "%*s %s\n",7,$5":",$9}'
+----------------------------------------------------
+# Rename all directories in the current folder lowercase
+$ rename 'y/A-Z/a-z/' *
+
+
+Rename all files to lowercase
+$ find my_root_dir -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;
+----------------------------------------------------
+#
+# Get the memory usage of a running program/process.
+# Make a script (mem.sh) and place the following code-block inside it.
+#Note: $1 is the command line parameter.
+# Usage: ./mem.sh firefox
+{
+sudo ps -eo size,pid,user,command --sort -size | awk '{ hr=$1/1024 ;    
+      printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) {  
+      printf("%s ",$x) } print "" }' |cut -d "" -f2 | cut -d "-" 
+      -f1|grep $1
+}# End of mem.sh
+----------------------------------------------------
+# Chrome Directory access from ChromeOS Chrome browser
+file:///home/chronos/user/Downloads/
+
+----------------------------------------------------
+# Master BSP system command on Linux !
+$ sudo lshw
+# The master system hardware report command.
+$ lscpu
+# Get the CPU processor info for a system
+#
+$ cat /proc/cpuinfo | grep 'model name' | uniq
+# Get Vendor
+$ cat /proc/cpuinfo | grep vendor | uniq
+#
+----------------------------------------------------
+
+# Mounting -----------------------------------
+mount -o loop <img file> <mountpoint>
+https://www.linuxquestions.org/questions/linux-software-2/how-to-mount-dos-img-file-4175430554/
+-t, --types vfstype
+The argument following the -t is used to indicate the filesystem type. The filesystem types which are currently supported include: adfs, affs, autofs, cifs, coda, coherent, cramfs, debugfs, devpts, efs, ext, ext2, ext3, ext4, hfs, hfsplus, hpfs, iso9660, jfs, minix, msdos, ncpfs, nfs, nfs4, ntfs, proc, qnx4, ramfs, reiserfs, romfs, squashfs, smbfs, sysv, tmpfs, ubifs, udf, ufs, umsdos, usbfs, vfat, xenix, xfs, xiafs. Note that coherent, sysv and xenix are equivalent and that xenix and coherent will be removed at some point in the future - use sysv instead. Since kernel version 2.1.21 the types ext and xiafs do not exist anymore. Earlier, usbfs was known as usbdevfs. Note, the real list of all supported filesystems depends on your kernel.
+
+--------------------------------------------------------------------
+# Write a Image (.img) file to USB device
+You can use dd for this.
+First list your devices with
+lsblk
+and find the USB device that you want to write to (for example, /dev/sdb, this might be different for you).
+Unmount the device by:
+sudo umount /dev/sdb
+Then write your file to USB by:
+sudo dd if=/path/to/file/downloaded of=/dev/sdb
+Make sure you select the correct drive in of=
+--------------------------------------------------------------------
+VARIABLES IN SCRIPTING
+https://askubuntu.com/questions/385528/how-to-increment-a-variable-in-bash
+
+https://stackoverflow.com/questions/9139401/trying-to-embed-newline-in-a-variable-in-bash
+---------------------------------------------------------------------
+PARSING / CUTTING & SCRIPTS
+---------------------------------------------------------------------
+# Examples of different types of Loops in Bash scripts
+# https://www.lifewire.com/bash-for-loop-examples-2200575
+
+https://stackoverflow.com/questions/1521462/looping-through-the-content-of-a-file-in-bash
+
+https://www.thegeekstuff.com/2013/06/cut-command-examples/
+---------------------------------------------------------------------
+# This will print all the target grep lines
+#
+cat PAK.dat | while read line
+do
+   grep qt4 | cut -d' ' -f3
+done
+---------------------------------------------------------------------
+CUT RANGES
+---------------------------------------------------------------------
+# Cut a range from 15 to 18 of the field and column from outputs
+$ ls -la | cut -c15-18
+
+# displays only first field of each lines from /etc/passwd file using the field # delimiter : (colon).
+$ Cut -d’:’ -f1 /etc/passwd
+
+# Cut the desired column using a space as the delimiter. 
+$ grep "qt4" PAK | cut -d' ' -f3
+---------------------------------------------------------------------
+REMOVING SOFTWARE & PACKAGE MGMT
+https://www.rosehosting.com/blog/list-all-installed-packages-with-apt-on-ubuntu/
+---------------------------------------------------------------------
+# Using DPKG
+$ sudo dpkg -l > PAK
+$ sudo vmware-installer --uninstall-product vmware-player
+
+# Remove software packages from Linux
+$ sudo apt-get --purge remove <software package>
+# List software packages
+$ sudo apt list --installed |grep "x"
+
+---------------------------------------------------------------------
+FILE STATUS ATTRIBUTES
+---------------------------------------------------------------------
+# Display the numeric value for the files attributes
+$ stat --format ‘%a’ <filename>
+   664 = -rw-rw-r--
+--------------------------------------------------------------------
+# Create the work link if needed
+cd ~
+ln -s 128gb/ CUSTOM-OS
+---------------------------------------------------------------------
+FINDING SORTING & SEARCHING
+# Sort by size descending
+--------------------------------------------------------------------
+$ ls -lS -h|more
+$ ls -lR -h| grep '^-' | sort -k 5 -rn
+
+
+# Find the file you want
+  $ find . -name "*.rc" -print
+# Now sort it
+  $ find . -name "*.rc" -print| sort -k 5 -rn
+
+$ find . -type d  -exec du -h {} + | sort -r -h|more
+-----------------------------------------------------
+# Check the type of formatting for a device, etc.
+  $ sudo file -sL /dev/sda
+---------------------------------------------------------------------
+PARTITION/MOUNTING ETC.
+---------------------------------------------------------------------
+# Create a New Partition
+https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-storage-devices-in-linux
+1-	$ lsblk
+	# Select the format
+2-	$ sudo parted /dev/sda mklabel gpt
+3-	$ sudo parted -a opt /dev/sda mkpart primary ext4 0% 100%
+	# Re-check it
+4-	$ lsblk
+	# Create the filesystem, use a label for the datapartition, e.g 128gb
+5-	$ sudo mkfs.ext4 -L 128gb /dev/sda1
+	# Review the drive details
+6-	$ sudo lsblk -o NAME,FSTYPE,LABEL,UUID,MOUNTPOINT
+	# Mount the drive
+7-	$ sudo mount -o defaults /dev/sda1    
+/var/host/media/removable/128gb
