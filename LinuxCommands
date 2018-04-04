@@ -1,10 +1,12 @@
-
+#***************************************************************************************************************************
+#***************************************************************************************************************************
 #
 # THIS STUFF IS JUST PERSONEL, NOBODY ELSE NEEDS IT !
 #
 # Linux Commands
+#***************************************************************************************************************************
+#***************************************************************************************************************************
 #
-
 https://www.linuxquestions.org/questions/linux-software-2/how-can-i-determine-what-github-repo-identifier-i-need-in-order-to-check-out-my-specific-ubuntu-linux-kernel-version-4175626376/
 When you clone the master of that repository, issue a...
 $ git branch -a
@@ -29,24 +31,18 @@ $ printf 'Desktop: %s\nSession: %s\n' "$XDG_CURRENT_DESKTOP" "$GDMSESSION"
 ----------------------------------------------------
 # DNS server stuff
 $ nmcli device show <interfacename> | grep IP4.DNS
-
-----------------------------------------------------
-	 	 	
+----------------------------------------------------	 	 	
 /etc/modules
-
 #----cut here----
 # Chip drivers
 coretemp
 #----cut here----
-
 ----------------------------------------------------
 Here's an advanced find command you can run to find files over 10 MB (no variables in this one, just copy and paste):
 find / -mount -noleaf -type f -size +10000k -print0 | xargs -0 ls -lhSr | awk '{printf "%*s %s\n",7,$5":",$9}'
 ----------------------------------------------------
 # Rename all directories in the current folder lowercase
 $ rename 'y/A-Z/a-z/' *
-
-
 Rename all files to lowercase
 $ find my_root_dir -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;
 ----------------------------------------------------
@@ -64,7 +60,6 @@ sudo ps -eo size,pid,user,command --sort -size | awk '{ hr=$1/1024 ;
 ----------------------------------------------------
 # Chrome Directory access from ChromeOS Chrome browser
 file:///home/chronos/user/Downloads/
-
 ----------------------------------------------------
 # Master BSP system command on Linux !
 $ sudo lshw
@@ -77,13 +72,19 @@ $ cat /proc/cpuinfo | grep 'model name' | uniq
 $ cat /proc/cpuinfo | grep vendor | uniq
 #
 ----------------------------------------------------
-
 # Mounting -----------------------------------
 mount -o loop <img file> <mountpoint>
 https://www.linuxquestions.org/questions/linux-software-2/how-to-mount-dos-img-file-4175430554/
 -t, --types vfstype
-The argument following the -t is used to indicate the filesystem type. The filesystem types which are currently supported include: adfs, affs, autofs, cifs, coda, coherent, cramfs, debugfs, devpts, efs, ext, ext2, ext3, ext4, hfs, hfsplus, hpfs, iso9660, jfs, minix, msdos, ncpfs, nfs, nfs4, ntfs, proc, qnx4, ramfs, reiserfs, romfs, squashfs, smbfs, sysv, tmpfs, ubifs, udf, ufs, umsdos, usbfs, vfat, xenix, xfs, xiafs. Note that coherent, sysv and xenix are equivalent and that xenix and coherent will be removed at some point in the future - use sysv instead. Since kernel version 2.1.21 the types ext and xiafs do not exist anymore. Earlier, usbfs was known as usbdevfs. Note, the real list of all supported filesystems depends on your kernel.
-
+The argument following the -t is used to indicate the filesystem type. 
+The filesystem types which are currently supported include: adfs, affs, autofs, 
+cifs, coda, coherent, cramfs, debugfs, devpts, efs, ext, ext2, ext3, ext4, hfs, 
+hfsplus, hpfs, iso9660, jfs, minix, msdos, ncpfs, nfs, nfs4, ntfs, proc, qnx4, 
+ramfs, reiserfs, romfs, squashfs, smbfs, sysv, tmpfs, ubifs, udf, ufs, umsdos, 
+usbfs, vfat, xenix, xfs, xiafs. Note that coherent, sysv and xenix are equivalent 
+and that xenix and coherent will be removed at some point in the future - use sysv instead. 
+Since kernel version 2.1.21 the types ext and xiafs do not exist anymore. Earlier, usbfs was 
+known as usbdevfs. Note, the real list of all supported filesystems depends on your kernel.
 --------------------------------------------------------------------
 # Write a Image (.img) file to USB device
 You can use dd for this.
@@ -98,16 +99,13 @@ Make sure you select the correct drive in of=
 --------------------------------------------------------------------
 VARIABLES IN SCRIPTING
 https://askubuntu.com/questions/385528/how-to-increment-a-variable-in-bash
-
 https://stackoverflow.com/questions/9139401/trying-to-embed-newline-in-a-variable-in-bash
 ---------------------------------------------------------------------
 PARSING / CUTTING & SCRIPTS
 ---------------------------------------------------------------------
 # Examples of different types of Loops in Bash scripts
 # https://www.lifewire.com/bash-for-loop-examples-2200575
-
 https://stackoverflow.com/questions/1521462/looping-through-the-content-of-a-file-in-bash
-
 https://www.thegeekstuff.com/2013/06/cut-command-examples/
 ---------------------------------------------------------------------
 # This will print all the target grep lines
@@ -121,10 +119,8 @@ CUT RANGES
 ---------------------------------------------------------------------
 # Cut a range from 15 to 18 of the field and column from outputs
 $ ls -la | cut -c15-18
-
 # displays only first field of each lines from /etc/passwd file using the field # delimiter : (colon).
 $ Cut -d’:’ -f1 /etc/passwd
-
 # Cut the desired column using a space as the delimiter. 
 $ grep "qt4" PAK | cut -d' ' -f3
 ---------------------------------------------------------------------
@@ -185,3 +181,84 @@ https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-sto
 	# Mount the drive
 7-	$ sudo mount -o defaults /dev/sda1    
 /var/host/media/removable/128gb
+*
+************************************************************************************************************************
+************************************************************************************************************************
+************************************************************************************************************************
+** NETWORK COMMANDS
+************************************************************************************************************************
+************************************************************************************************************************
+************************************************************************************************************************
+*
+
+# --------------------------------------------------------------------------------
+$ ping  - But sites are turning of icmp
+$ nping
+$ fping
+$ traceroute
+
+# Nice one ! , https://nmap.org/
+$ nmap -A -T4 scanme.nmap.org
+$ https://nmap.org/book/man-briefoptions.html
+$ nmap -sP -Pn --max-retries=1 --host-timeout=1500ms 85.214.73.63
+-OR- # Without the Pn
+$ nmap -sP --max-retries=1 --host-timeout=1500ms 85.214.73.63
+
+# --------------------------------------------------------------------------------
+# Touch a network using curl
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" http://hostname/resource
+
+# Whats MyDNS
+https://www.whatsmydns.net/
+#
+# ---------------------------------
+# Change DNS Servers From GOOGLE, It tracks everything.
+# -------------------------------
+https://askubuntu.com/questions/820667/how-do-i-permanently-configure-the-dns-server-list-in-16-04
+
+IPv4
+8.8.8.8, 8.8.4.4.Google 
+IPv6
+2001:4860:4860::8888, 2001:4860:4860::8844
+--TO--
+DuckDuckGo
+#
+#...................................................
+#    Master linux commands and tools for data tracking.
+*****************************************************
+# The General list
+# Get network requests and connections
+$ netstat -nputw
+----------------------------------------------------
+# The SPECIFIC Port Data Flow
+$ sudo tcpdump -i any port 443
+*****************************************************
+$ sudo tcpdump|grep “google”
+#---------------
+
+# Network Commands
+# IP Conversion
+$ nmcli dev show | grep DNS
+$ nmap -sn <ip_addr>
+$ nmap -sP -6 2604:2d80:400a:80ee:3452:1f95:23eb:86dc
+
+$ nslookup mediacom.com
+Server:	127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	mediacom.com
+Address: 52.174.181.178
+
+$ sudo tcpdump -i any port 443
+12:11:22.649669 IP6 ord36s02-in-x0e.1e100.net.443 > System-i7700.36010: UDP, length 29
+12:11:22.649978 IP6 ord36s02-in-x0e.1e100.net.443 > System-i7700.36010: UDP, length 189
+12:11:22.650705 IP6 System-i7700.36010 > ord36s02-in-x0e.1e100.net.443: UDP, length 48
+12:11:22.670684 IP6 System-i7700.34079 > jg-in-xbd.1e100.net.443: UDP, length 35
+12:11:22.898037 IP6 jg-in-xbd.1e100.net.443 > System-i7700.34079: UDP, length 363
+
+----------------------------------
+# File Permissions
+744 - User execute
+644 - Normal user RW file
+----------------------------------
