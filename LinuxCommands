@@ -262,3 +262,44 @@ $ sudo tcpdump -i any port 443
 744 - User execute
 644 - Normal user RW file
 ----------------------------------
+LINUX-CMD-REFFERENCE
+---------------------
+
+/* Check if hardware supports Virtualization
+** Output should= "Virtualization:                     VT-x"
+** Oupput for egrep must be > 0
+** install qemu and kvm // kvm is a Type 1 Hypervisor
+** reboot
+*/
+$ LC_ALL=C lscpu | grep Virtualization
+$ egrep -c '(vmx|svm)' /proc/cpuinfo
+$ sudo apt install qemu qemu-kvm virt-manager bridge-utils
+$ sudo reboot
+---------------------------------------------------------------
+/*
+** Check if using X11 or Wayland
+*/
+$ loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type
+$ echo $XDG_SESSION_TYPE
+---------------------------------------------------------------
+
+REMOVE THIS
+gnome-screensaver-command
+---------------------------------------------------------------
+/*
+**						tmux new -s <sessionName>
+**
+** tmux new -s <sessionName>	// Create a new tmux session with ctrl bar at the bottom
+** ctrl+b, c 					// Creates a new window and shows the window id on the ctrl bar
+** ctrl+b, n 					// Switch to the next window in the tmux session
+** ctrl+b ,						// Enter rename mode for the current window
+
+** --------  Split and arrange term windows
+** ctrl+b %						// Split screen vert
+** ctrl+b "						// Split screen horz
+** ctrl+b <space>				// toggle through the circular list of term layouts
+** ctrl+b ctrl <arrow key>		// Resize current active term window area
+** ctrl+b <arrow key>			// Switch between active term window (sometimes a mouse over may allow this action)
+**
+**
+*/
